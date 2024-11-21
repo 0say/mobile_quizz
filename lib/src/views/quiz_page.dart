@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet_two/src/controllers/quiz_controller.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 class QuizzPage extends StatefulWidget {
@@ -15,18 +16,36 @@ class _QuizzPageState extends State<QuizzPage> {
 
   final quizController = QuizController();
   List<Icon> score = [];
+  int aciertos = 0;
   void checkAnswer(bool userAnswer){
     setState(() {
       bool correctAnswer = quizController.getCorrectAnswer();
+      {
+        if (userAnswer == correctAnswer) {
+          score.add(Icon(Icons.check, color: Colors.green,));
+          aciertos += 1;
+        }
+        else
+        {
+          score.add(Icon(Icons.close, color: Colors.red,));
 
-      if(userAnswer == correctAnswer){
-        score.add(Icon(Icons.check, color: Colors.green,));
+        }
+
+        if (quizController.isFinished())
+        {
+          Alert(
+            context: context,
+            title: 'Terminado!',
+            desc: 'Tu Puntuacion es de $aciertos aciertos',
+          ).show();
+          quizController.reset();
+          score = [];
+          aciertos = 0;
+        }
+        else{}
+
+        quizController.nextQuestion();
       }
-      else {
-        score.add(Icon(Icons.close, color: Colors.red,));
-      }
-      
-      quizController.nextQuestion();
     });
   }
   // oh
