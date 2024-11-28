@@ -21,15 +21,10 @@ class QuizController {
   bool getCorrectAnswer(){
     return _questionBank[_questionNumber].answer;
   }
-  bool isFinished(){
-    if (_questionNumber >= _questionBank.length -1)
-    {
-      return true;
-    }
-    else {
-      return false;
-    }
+  bool isFinished() {
+    return _questionNumber >= _questionBank.length - 1;
   }
+
   void reset(){
     _questionNumber = 0;
   }

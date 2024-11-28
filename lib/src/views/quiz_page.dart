@@ -39,12 +39,12 @@ class _QuizzPageState extends State<QuizzPage> {
             desc: 'Tu Puntuacion es de $aciertos aciertos',
           ).show();
           quizController.reset();
-          score = [];
+          score.clear();
           aciertos = 0;
         }
-        else{}
-
-        quizController.nextQuestion();
+        else {
+          quizController.nextQuestion();
+        }
       }
     });
   }
